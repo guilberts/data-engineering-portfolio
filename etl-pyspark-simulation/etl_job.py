@@ -1,8 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, year, when
 
+
 # Set the path to writing parquet
-destination_path = '/output_movies'
+destination_path = 'output_movies'
 
 # intializing Spark session (simulating Job)
 spark = SparkSession.builder \
