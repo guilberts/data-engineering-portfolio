@@ -14,10 +14,18 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: Install Java
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: |
           pip install pyspark pytest
 
       - name: Run ETL Job
-        run: |
-          python etl_job.py
+        working-directory: ./etl-pyspark-simulation
+        run: python etl_job.py
+
