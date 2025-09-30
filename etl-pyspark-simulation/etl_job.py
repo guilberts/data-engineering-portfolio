@@ -27,11 +27,11 @@ print(f"Filtered total records: {df_transformed.count()}")
 
 # 3. Enritchment: creating new classified column
 df_final = df_transformed.withColumn(
-    "rating_category",
-    when(col("vote_average") < 5, "Ruim")
-    .when(col("vote_average") < 7, "Regular")
-    .when(col("vote_average") < 8, "Bom")
-    .otherwise("Excelente")
+        "rating_category",
+        when(col("vote_average") < 5, "Poor")
+        .when(col("vote_average") < 7, "Average")
+        .when(col("vote_average") < 8, "Good")
+        .otherwise("Excellent")
 )
 
 print("\n=== Show Classified Data ===")

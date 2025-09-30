@@ -1,31 +1,37 @@
 name: PySpark ETL CI
-
 on: [push, pull_request]
-
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-
+          cache: "pip"
+      
       - name: Install Java
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk
           echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
-          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
-
+          echo "/usr/lib/jvm/java-17-openjdk-amd64/bin" >> $GITHUB_PATH
+      
       - name: Install dependencies
-        run: |
-          pip install pyspark pytest
-
+        working-directory: ./etl-pyspark-simulation
+        run: pip install -r requirements.txt
+      
+      - name: Run tests
+        working-directory: ./etl-pyspark-simulation
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+        run: pytest tests/ -v
+      
       - name: Run ETL Job
         working-directory: ./etl-pyspark-simulation
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
         run: python etl_job.py
-
