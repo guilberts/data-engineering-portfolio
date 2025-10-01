@@ -63,13 +63,3 @@ Run the project with:
 ```sh
 python {entrypoint}
 ```
-
-### Testing:
-
-Etl-pyspark-simulation uses the {__test_framework__} test framework. Run the test suite with:
-
-**Using:**
-
-```sh
-pytest
-```
