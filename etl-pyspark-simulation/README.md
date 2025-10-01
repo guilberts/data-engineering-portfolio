@@ -64,7 +64,7 @@ Build etl-pyspark-simulation from the source and intsall dependencies:
 	❯ pip install -r requirements.txt
 	```
 
-### Usage
+### Usage 
 
 Run the project with:
 
